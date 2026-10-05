@@ -1,0 +1,38 @@
+name: Callora
+options:
+  bundleIdPrefix: com.callora
+  deploymentTarget:
+    iOS: "16.0"
+  xcodeVersion: "15.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGN_STYLE: Automatic
+targets:
+  Callora:
+    type: application
+    platform: iOS
+    sources:
+      - path: Callora/App
+      - path: Callora/Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callora.app
+        INFOPLIST_FILE: Callora/App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Callora/App/Callora.entitlements
+    dependencies:
+      - target: CallDirectory
+        embed: true
+  CallDirectory:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Callora/CallDirectory
+      - path: Callora/Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.callora.app.CallDirectory
+        INFOPLIST_FILE: Callora/CallDirectory/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Callora/CallDirectory/CallDirectory.entitlements
+        APPLICATION_EXTENSION_API_ONLY: YES
